@@ -9,10 +9,9 @@ pipeline {
 		stage('Docker build and push') {
 			steps{
 				withDockerRegistry(credentialsId: 'docker-hub', url: 'https://index.docker.io/v1/') {
-					sshagent (credentials: ['ssh-remote']) {
-						sh 'ssh -o StrictHostKeyChecking=no -l vsii 192.168.0.221 docker build -t kenshinthuong/springboot-demo:v1 .'
-						sh 'ssh -o StrictHostKeyChecking=no -l vsii 192.168.0.221 docker push kenshinthuong/springboot-demo:v1'
-					}		
+				sh 'docker build -t kenshinthuong/springboot-demo:v1 .'
+				sh 'docker push kenshinthuong/springboot-demo:v1'
+				
 				}
 			}
 		}
